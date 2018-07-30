@@ -1,0 +1,23 @@
+{
+    "name": "moderntoken/ex2",
+    "authors": [
+        {
+            "name": "RusinovArtem",
+            "email": "ar@moderntoken.com"
+        }
+    ],
+    "require": {
+        "symfony/dependency-injection": "^4.1",
+        "symfony/routing": "^4.1",
+        "symfony/config": "^4.1"
+    },
+
+
+    "autoload":
+    {
+        "psr-4": {
+            "Rusinov\\Ex2\\":"src"
+        }
+    },
+    "description": ""
+}
