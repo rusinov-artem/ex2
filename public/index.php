@@ -7,4 +7,7 @@ require_once __DIR__."/../vendor/autoload.php";
 $c = include __DIR__."/../boot/bootContainer.php";
 include __DIR__."/../boot/bootRoutes.php";
 
-$t1 = $c->get('t2');
+
+$app = new \Rusinov\Ex2\HttpApp();
+$app->container = $c;
+$app->handle($_SERVER['REQUEST_URI']);

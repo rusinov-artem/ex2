@@ -29,7 +29,8 @@ class ProjectUrlMatcher extends Symfony\Component\Routing\Matcher\UrlMatcher
         switch ($pathinfo) {
             default:
                 $routes = array(
-                    '/' => array(array('_route' => 'home', '_controller' => 'hello', '_action' => 'index'), null, null, null),
+                    '/' => array(array('_route' => 'home', '_controller' => 'Rusinov\\Ex2\\Controller\\HomeController', '_action' => 'index'), null, null, null),
+                    '/home' => array(array('_route' => 'hom2', '_i' => 'alskdfj'), null, null, null),
                 );
 
                 if (!isset($routes[$pathinfo])) {
