@@ -10,14 +10,7 @@ if(file_exists(__DIR__."/../storage/routeMatcher.php") && file_exists(__DIR__."/
     //return;
 }
 
-$rCollection = new RouteCollection();
-
-$route = new Route("/", ['_controller'=>\Rusinov\Ex2\Controller\HomeController::class, '_action'=>'index']);
-$rCollection->add('home', $route);
-
-$route = new Route('/home', ['_i'=>'alskdfj']);
-$rCollection->add('hom2', $route);
-
+$rCollection = include __DIR__."/../conifg/routes.php";
 
 $md = new PhpMatcherDumper($rCollection);
 file_put_contents( __DIR__."/../storage/routeMatcher.php",$md->dump());
