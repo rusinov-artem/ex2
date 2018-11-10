@@ -5,8 +5,11 @@ use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 $containerFileName = __DIR__."/../storage/container.php";
 if(file_exists($containerFileName))
 {
-    //require_once $containerFileName;
-    //return new ProjectServiceContainer;
+    if($params['development'] == false)
+    {
+        require_once $containerFileName;
+        return new ProjectServiceContainer;
+    }
 }
 
 $container = include __DIR__."/../conifg/container.php";

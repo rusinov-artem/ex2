@@ -44,7 +44,6 @@ class HttpApp
     {
         $controller = $this->container->get($action->controller);
         return $this->call([$controller, $action->method], $action->parameters);
-
     }
 
     public function call($callback, $parameters)
@@ -73,8 +72,6 @@ class HttpApp
                 $dependencies[] = $parameter->getDefaultValue();
             }
         }
-
-        //$callbackDependencies = array_merge($dependencies, $parameters);
 
         return call_user_func_array($callback, $dependencies);
 

@@ -2,12 +2,14 @@
 
 use Symfony\Component\Routing\Generator\Dumper\PhpGeneratorDumper;
 use Symfony\Component\Routing\Matcher\Dumper\PhpMatcherDumper;
-use Symfony\Component\Routing\Route;
-use Symfony\Component\Routing\RouteCollection;
+
 
 if(file_exists(__DIR__."/../storage/routeMatcher.php") && file_exists(__DIR__."/../storage/routeGenerator"))
 {
-    //return;
+    if($params['development'] == false)
+    {
+        return;
+    }
 }
 
 $rCollection = include __DIR__."/../conifg/routes.php";
