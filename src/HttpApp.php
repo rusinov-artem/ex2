@@ -6,6 +6,7 @@ namespace Rusinov\Ex2;
 use ReflectionFunction;
 use ReflectionMethod;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 
@@ -16,6 +17,11 @@ class HttpApp
      */
     public $container;
 
+    /**
+     * @var EventDispatcher
+     */
+    public $dispatcher;
+
     public function handle($input)
     {
         /**
@@ -23,14 +29,21 @@ class HttpApp
          */
         $matcher = $this->container->get(UrlMatcher::class);
 
-        if(is_string($input))
-        {
-            $route = $matcher->match($input);
+        try{
+            if(is_string($input))
+            {
+                $route = $matcher->match($input);
+            }
+            elseif($input instanceof Request)
+            {
+                $route = $matcher->matchRequest($input);
+            }
         }
-        elseif($input instanceof Request)
+        catch (\Throwable $t)
         {
-            $route = $matcher->matchRequest($input);
+            var_dump($t);
         }
+
 
         $action = new Action();
         $action->controller = $route['_controller'];

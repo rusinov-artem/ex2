@@ -3,8 +3,10 @@
 use Rusinov\Ex2\Controller\HomeController;
 use Rusinov\Ex2\Factory\RouterFactory;
 use Rusinov\Ex2\Services\Service1;
+use Rusinov\Ex2\T1;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 
@@ -13,7 +15,7 @@ $container = new ContainerBuilder();
 
 $container->setParameter('aasdf','alskdfj');
 
-$container->register('t1', \Rusinov\Ex2\T1::class)
+$container->register('t1', T1::class)
     ->addArgument('Hello')
     ->setPublic(true);
 

@@ -19,4 +19,9 @@ class HomeController
         var_dump($s);
         var_dump('index method of Home Controller');
     }
+
+    public function home($t=null)
+    {
+        var_dump('home');
+    }
 }
