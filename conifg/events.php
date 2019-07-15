@@ -1,6 +1,6 @@
 <?php
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 $d = new EventDispatcher();

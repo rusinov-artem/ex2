@@ -3,20 +3,22 @@
 
 namespace Rusinov\Ex2\Factory;
 
+use Symfony\Component\Routing\Generator\CompiledUrlGenerator;
+use Symfony\Component\Routing\Matcher\CompiledUrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 
 class RouterFactory
 {
     public static function getUrlMatcher(RequestContext $context)
     {
-        require_once __DIR__."/../../storage/routeMatcher.php";
-        return new \ProjectUrlMatcher($context);
+        $compiled = include __DIR__."/../../storage/routeMatcher.php";
+        return new CompiledUrlMatcher($compiled, $context);
     }
 
     public static function getUrlGenerator(RequestContext $context)
     {
-        require_once __DIR__."/../../storage/routeGenerator.php";
-        return new \ProjectUrlGenerator($context);
+        $compiled = include __DIR__."/../../storage/routeGenerator.php";
+        return new CompiledUrlGenerator($compiled, $context);
     }
 
     public static function getContext()
