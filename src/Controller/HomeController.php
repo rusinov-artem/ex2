@@ -6,7 +6,7 @@ namespace Rusinov\Ex2\Controller;
 
 use Rusinov\Ex2\Services\Service1;
 
-class HomeController
+class HomeController extends BaseController
 {
 
     public function __construct()
@@ -14,10 +14,9 @@ class HomeController
 
     }
 
-    public function index(Service1 $s)
+    public function index()
     {
-        var_dump($s);
-        var_dump('index method of Home Controller');
+        return $this->render('index.php', []);
     }
 
     public function home($t=null)

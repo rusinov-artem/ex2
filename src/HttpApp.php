@@ -28,6 +28,8 @@ class HttpApp
      */
     public $logger;
 
+    public $viewDir = __DIR__."/../resource/views";
+
     public function handle($input)
     {
         /**
@@ -65,6 +67,12 @@ class HttpApp
     public function run(Action $action)
     {
         $controller = $this->container->get($action->controller);
+
+        if(property_exists($controller, 'app'))
+        {
+            $controller->app = &$this;
+        }
+
         return $this->call([$controller, $action->method], $action->parameters);
     }
 
