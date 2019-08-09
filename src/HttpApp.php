@@ -3,6 +3,7 @@
 
 namespace Rusinov\Ex2;
 
+use Monolog\Logger;
 use ReflectionFunction;
 use ReflectionMethod;
 use Symfony\Component\DependencyInjection\Container;
@@ -21,6 +22,11 @@ class HttpApp
      * @var EventDispatcher
      */
     public $dispatcher;
+
+    /**
+     * @var Logger
+     */
+    public $logger;
 
     public function handle($input)
     {
@@ -41,7 +47,8 @@ class HttpApp
         }
         catch (\Throwable $t)
         {
-            var_dump($t);
+            $this->logger->err(throwableToString($t));
+            return "not found";
         }
 
 
@@ -50,7 +57,9 @@ class HttpApp
         $action->method = $route['_action'];
         $action->parameters = $route;
 
-        return  $this->run($action);
+        $r =   $this->run($action);
+        $this->logger->info("App successfully handled request", ['system']);
+        return $r;
     }
 
     public function run(Action $action)
@@ -88,5 +97,11 @@ class HttpApp
 
         return call_user_func_array($callback, $dependencies);
 
+    }
+
+    public function notFound()
+    {
+        http_send_status(404);
+        return "not found";
     }
 }

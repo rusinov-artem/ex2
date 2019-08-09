@@ -11,7 +11,8 @@
         "symfony/routing": "^4.3",
         "symfony/config": "^4.3",
         "symfony/http-foundation": "^4.3",
-        "symfony/event-dispatcher": "^4.3"
+        "symfony/event-dispatcher": "^4.3",
+        "monolog/monolog": "^1.24"
     },
 
 
@@ -19,7 +20,8 @@
     {
         "psr-4": {
             "Rusinov\\Ex2\\":"src"
-        }
+        },
+        "files": ["src/functions.php"]
     },
     "description": ""
 }
