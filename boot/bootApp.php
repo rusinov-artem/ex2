@@ -26,9 +26,7 @@ return
 
         $app->logger = new \Monolog\Logger("app");
         $fileHandler = new StreamHandler(__DIR__.'/../storage/log/app.log', Logger::DEBUG);
-        $myHandler = new LogHandler();
         $app->logger->pushHandler($fileHandler);
-        $app->logger->pushHandler($myHandler);
 
 
         return $app;
