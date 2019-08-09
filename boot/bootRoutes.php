@@ -8,7 +8,9 @@ use Symfony\Component\Routing\Generator\Dumper\CompiledUrlGeneratorDumper;
 use Symfony\Component\Routing\Matcher\Dumper\CompiledUrlMatcherDumper;
 
 
-if(file_exists(__DIR__."/../storage/routeMatcher.php") && file_exists(__DIR__."/../storage/routeGenerator"))
+$routMatcherFile = __DIR__ . "/../storage/routeMatcher.php";
+$routeGeneratorFile = __DIR__ . "/../storage/routeGenerator.php";
+if(file_exists($routMatcherFile) && file_exists($routeGeneratorFile))
 {
     if($params['development'] == false)
     {
@@ -19,7 +21,7 @@ if(file_exists(__DIR__."/../storage/routeMatcher.php") && file_exists(__DIR__."/
 $rCollection = include __DIR__."/../conifg/routes.php";
 
 $md = new CompiledUrlMatcherDumper($rCollection);
-file_put_contents( __DIR__."/../storage/routeMatcher.php",$md->dump());
+file_put_contents( $routMatcherFile,$md->dump());
 
 $gd = new CompiledUrlGeneratorDumper($rCollection);
 file_put_contents(__DIR__."/../storage/routeGenerator.php",$gd->dump());

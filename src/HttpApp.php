@@ -49,7 +49,6 @@ class HttpApp
         }
         catch (\Throwable $t)
         {
-            $this->logger->err(throwableToString($t));
             return "not found";
         }
 
@@ -60,7 +59,6 @@ class HttpApp
         $action->parameters = $route;
 
         $r =   $this->run($action);
-        $this->logger->info("App successfully handled request", ['system']);
         return $r;
     }
 

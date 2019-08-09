@@ -24,10 +24,6 @@ return
         $app->params = $params;
         $app->dispatcher = $d;
 
-        $app->logger = new \Monolog\Logger("app");
-        $fileHandler = new StreamHandler(__DIR__.'/../storage/log/app.log', Logger::DEBUG);
-        $app->logger->pushHandler($fileHandler);
-
 
         return $app;
     })($params);

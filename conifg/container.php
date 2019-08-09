@@ -1,12 +1,13 @@
 <?php
 
+use Doctrine\DBAL\Connection;
 use Rusinov\Ex2\Controller\HomeController;
+use Rusinov\Ex2\Factory\dbConnectionFactory;
 use Rusinov\Ex2\Factory\RouterFactory;
 use Rusinov\Ex2\Services\Service1;
 use Rusinov\Ex2\T1;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 
@@ -14,6 +15,11 @@ $container = new ContainerBuilder();
 
 
 $container->setParameter('aasdf','alskdfj');
+
+$container->register(Connection::class)
+    ->setFactory([dbConnectionFactory::class, 'getDBConnection'])
+    ->addArgument($params)
+    ->setPublic(true);
 
 $container->register('t1', T1::class)
     ->addArgument('Hello')
@@ -35,6 +41,8 @@ $container->register(Service1::class)
 
 $container->register(HomeController::class)
     ->setPublic(true)->setAutowired(true);
+
+
 
 $cp = new Rusinov\Ex2\CP\cp1();
 $container->addCompilerPass($cp);
