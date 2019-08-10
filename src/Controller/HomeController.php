@@ -11,6 +11,8 @@ use Rusinov\Ex2\Services\Service1;
 class HomeController extends BaseController
 {
 
+    public $layout = "layout.php";
+
     public function __construct()
     {
 
@@ -18,12 +20,6 @@ class HomeController extends BaseController
 
     public function index(Connection $db)
     {
-        $stm =$db->query("show tables");
-        $stm->execute();
-        while($row = $stm->fetch(\PDO::FETCH_ASSOC))
-        {
-            var_dump($row);
-        }
 
         return $this->render('index.php', []);
     }
