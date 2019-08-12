@@ -12,4 +12,7 @@ $rCollection->add('home', $route);
 $route = new Route('/home', ['t' => 'alskdfj', "_controller"=>HomeController::class, '_action'=>'home']);
 $rCollection->add('hom2', $route);
 
+$mw = 'auth';
+$route = new Route("/t1", ['mw'=>$mw]);
+$rCollection->add('t1', $route);
 return $rCollection;
