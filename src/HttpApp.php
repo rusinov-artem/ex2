@@ -54,6 +54,8 @@ class HttpApp
 
 
         $action = new Action();
+        $action->name = $route['_route'];
+        $action->middleware = $route['middleware'] ?? [];
         $action->controller = $route['_controller'];
         $action->method = $route['_action'];
         $action->parameters = $route;
@@ -64,6 +66,7 @@ class HttpApp
 
     public function run(Action $action)
     {
+        $middleWares = $this->getMiddleware($action);
         $controller = $this->container->get($action->controller);
 
         if(property_exists($controller, 'app'))
@@ -109,5 +112,14 @@ class HttpApp
     {
         http_send_status(404);
         return "not found";
+    }
+
+    private function getMiddleware(Action $action)
+    {
+        foreach ($action->middleware as $middleware)
+        {
+            $this->container->get($middleware);
+        }
+
     }
 }
