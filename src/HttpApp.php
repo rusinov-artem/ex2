@@ -6,9 +6,12 @@ namespace Rusinov\Ex2;
 use Monolog\Logger;
 use ReflectionFunction;
 use ReflectionMethod;
+use Rusinov\Ex2\Framework\ErrorHandler;
+use Rusinov\Ex2\Framework\MiddlewareCollection;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 
 class HttpApp
@@ -29,6 +32,11 @@ class HttpApp
     public $logger;
 
     public $viewDir = __DIR__."/../resource/views";
+
+    public function __construct()
+    {
+        $this->setErrorHandlers();
+    }
 
     public function handle($input)
     {
@@ -66,7 +74,7 @@ class HttpApp
 
     public function run(Action $action)
     {
-        $middleWares = $this->getMiddleware($action);
+
         $controller = $this->container->get($action->controller);
 
         if(property_exists($controller, 'app'))
@@ -74,7 +82,13 @@ class HttpApp
             $controller->app = &$this;
         }
 
-        return $this->call([$controller, $action->method], $action->parameters);
+        $middlewareCollection = $this->getMiddlewareCollection($action);
+        $request = $this->container->get(Request::class);
+        $response = new Response();
+        $middlewareCollection->before($action, $request, $response);
+        $result =  $this->call([$controller, $action->method], $action->parameters);
+        $middlewareCollection->after($action, $request, $response);
+        return $result;
     }
 
     public function call($callback, $parameters)
@@ -114,12 +128,22 @@ class HttpApp
         return "not found";
     }
 
-    private function getMiddleware(Action $action)
+    protected function getMiddlewareCollection(Action $action)
     {
+        $collection = [];
         foreach ($action->middleware as $middleware)
         {
-            $this->container->get($middleware);
+            $middleware = $this->container->get($middleware);
+            $middleware->app = $this;
+            $collection[] = $middleware;
         }
+        return new MiddlewareCollection($collection);
+    }
 
+    public function setErrorHandlers()
+    {
+        $eh = new ErrorHandler();
+        set_error_handler([$eh, 'errorHandler']);
+        set_exception_handler([$eh, 'exceptionHandler']);
     }
 }

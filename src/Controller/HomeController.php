@@ -4,9 +4,7 @@
 namespace Rusinov\Ex2\Controller;
 
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Query\QueryBuilder;
-use Rusinov\Ex2\Services\Service1;
+use Rusinov\Ex2\Entity\YCoordinate;
 
 class HomeController extends BaseController
 {
@@ -18,13 +16,14 @@ class HomeController extends BaseController
 
     }
 
-    public function index(Connection $db)
+    public function index( YCoordinate $c )
     {
 
+        var_dump($c);
         return $this->render('index.php', []);
     }
 
-    public function home($t=null)
+    public function home()
     {
         var_dump('home');
     }

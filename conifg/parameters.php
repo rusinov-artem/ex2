@@ -7,6 +7,8 @@ return
    'channels' => [
      'system' =>['*'],
      'exception'=>['*'],
+     'UnhandledException'=>['*'],
+     'UnhandledError' => ['*'],
    ],
 
     'mysql' =>

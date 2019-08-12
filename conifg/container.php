@@ -6,11 +6,10 @@
 
 use Doctrine\DBAL\Connection;
 use Rusinov\Ex2\Controller\HomeController;
-use Rusinov\Ex2\Factory\dbConnectionFactory;
+use Rusinov\Ex2\Factory\DbConnectionFactory;
 use Rusinov\Ex2\Factory\MainFactory;
 use Rusinov\Ex2\Factory\RouterFactory;
 use Rusinov\Ex2\Services\Service1;
-use Rusinov\Ex2\T1;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\FileLoader;
 use Symfony\Component\DependencyInjection\Reference;
@@ -24,16 +23,12 @@ $container = new ContainerBuilder();
 $container->setParameter('aasdf','alskdfj');
 
 $container->register(Request::class)
-    ->setFactory(MainFactory::class, 'getRequest')
+    ->setFactory([MainFactory::class, 'getRequest'])
     ->setPublic(true);
 
 $container->register(Connection::class)
-    ->setFactory([dbConnectionFactory::class, 'getDBConnection'])
+    ->setFactory([DbConnectionFactory::class, 'getDBConnection'])
     ->addArgument($params)
-    ->setPublic(true);
-
-$container->register('t1', T1::class)
-    ->addArgument('Hello')
     ->setPublic(true);
 
 $container->register(UrlMatcher::class )
