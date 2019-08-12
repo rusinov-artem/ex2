@@ -31,8 +31,6 @@ class HttpApp
      */
     public $logger;
 
-    public $viewDir = __DIR__."/../resource/views";
-
     public function __construct()
     {
         $this->setErrorHandlers();
@@ -120,12 +118,6 @@ class HttpApp
 
         return call_user_func_array($callback, $dependencies);
 
-    }
-
-    public function notFound()
-    {
-        http_send_status(404);
-        return "not found";
     }
 
     protected function getMiddlewareCollection(Action $action)
