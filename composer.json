@@ -14,7 +14,10 @@
         "symfony/event-dispatcher": "^4.3",
         "monolog/monolog": "^1.24",
         "symfony/cache": "^4.3",
-        "doctrine/dbal": "^2.9"
+        "doctrine/dbal": "^2.9",
+        "symfony/finder": "^4.3",
+        "phpunit/phpunit": "^8.3",
+        "symfony/filesystem": "^4.3"
     },
 
 
@@ -25,5 +28,12 @@
         },
         "files": ["src/functions.php"]
     },
+
+    "autoload-dev": {
+        "psr-4": {
+            "Rusinov\\Ex2\\tests\\": "tests"
+        }
+    },
+
     "description": ""
 }
