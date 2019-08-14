@@ -24,7 +24,8 @@ class YCoordinateRepository
             $coord->id = uniqid();
         }
 
-        file_put_contents("{$this->dir}/{$coord->id}", $str);
+        $file = "{$this->dir}/{$coord->id}";
+        file_put_contents($file, $str);
     }
 
     public function all()
@@ -45,5 +46,9 @@ class YCoordinateRepository
 
         }
         return $result;
+    }
+
+    public function setDir($dir){
+        $this->dir = $dir;
     }
 }

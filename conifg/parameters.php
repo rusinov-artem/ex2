@@ -18,6 +18,11 @@ return
         'password' => '',
         'host'     => '',
         'driver'   => 'pdo_mysql',
+    ],
+
+    'YCoordinateRepository'=>
+    [
+        'dir' => __DIR__."/../storage/data/coords"
     ]
 
 ];

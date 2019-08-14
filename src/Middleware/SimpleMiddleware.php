@@ -23,7 +23,7 @@ class SimpleMiddleware extends AbstractMiddleware
 
         var_dump('Before');
         $coord = new YCoordinate();
-        $data = $request->get('coord');
+        $data = $request->request->get('coord');
         $coord->latitude = $data['latitude'];
         $coord->longitude = $data['longitude'];
         $action->parameters['c'] = $coord;

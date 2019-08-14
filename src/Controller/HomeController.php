@@ -16,10 +16,8 @@ class HomeController extends BaseController
 
     }
 
-    public function index( YCoordinate $c )
+    public function index()
     {
-
-        var_dump($c);
         return $this->render('index.php', []);
     }
 
