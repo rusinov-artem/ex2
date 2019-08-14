@@ -21,5 +21,6 @@ class MapAPIController
         $collection = new  YCoordinateCollection($coords);
         header("Content-Type: text/json");
         return $collection->toYMapPoints();
+        //readfile(__DIR__."/../../storage/data/example.json");
     }
 }

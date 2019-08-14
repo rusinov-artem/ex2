@@ -31,14 +31,14 @@ class YCoordinateCollection
                     'type'=>'Point',
                     'coordinates'=>[
                         $coord->latitude, $coord->longitude,
-                    ],
-                    'properties'=>[
-                        'balloonContentHeader' => 'header',
-                        'balloonContentBody' => 'body',
-                        'balloonContentFooter' =>'footer',
-                        'clusterCaption'=>'cluster caption',
-                        'hintContent'=>'<strong>Текст  <s>подсказки</s></strong>'
-                    ],
+                    ]
+                ],
+                'properties'=>[
+                    'balloonContentHeader' => 'header',
+                    'balloonContentBody' => 'body',
+                    'balloonContentFooter' =>'footer',
+                    'clusterCaption'=>'cluster caption',
+                    'hintContent'=>'<strong>Текст  <s>подсказки</s></strong>'
                 ]
             ];
 
