@@ -36,7 +36,14 @@ class HttpApp
         $this->setErrorHandlers();
     }
 
-    public function handle($input)
+    public function handle(Request $request)
+    {
+        $action = $this->getAction($request);
+        $r =   $this->run($action);
+        return $r;
+    }
+
+    public function getAction(Request $request)
     {
         /**
          * @var $matcher UrlMatcher
@@ -44,21 +51,14 @@ class HttpApp
         $matcher = $this->container->get(UrlMatcher::class);
 
         try{
-            if(is_string($input))
-            {
-                $route = $matcher->match($input);
-            }
-            elseif($input instanceof Request)
-            {
-                $route = $matcher->matchRequest($input);
-            }
+            $route = $matcher->matchRequest($request);
         }
         catch (\Throwable $t)
         {
             return "not found";
         }
 
-
+        $this->container->set(Request::class, $request);
         $action = new Action();
         $action->name = $route['_route'];
         $action->middleware = $route['middleware'] ?? [];
@@ -66,8 +66,7 @@ class HttpApp
         $action->method = $route['_action'];
         $action->parameters = $route;
 
-        $r =   $this->run($action);
-        return $r;
+        return $action;
     }
 
     public function run(Action $action)
@@ -86,7 +85,17 @@ class HttpApp
         $middlewareCollection->before($action, $request, $response);
         $result =  $this->call([$controller, $action->method], $action->parameters);
         $middlewareCollection->after($action, $request, $response);
-        return $result;
+
+        if($result instanceof Response)
+        {
+            return $result;
+        }
+
+        if(is_string($result))
+        {
+            $response->setContent($result);
+            return $response;
+        }
     }
 
     public function call($callback, $parameters)
