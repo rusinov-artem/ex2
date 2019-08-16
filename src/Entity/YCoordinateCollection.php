@@ -31,15 +31,26 @@ class YCoordinateCollection
                     'type'=>'Point',
                     'coordinates'=>[
                         $coord->latitude, $coord->longitude,
-                    ]
+                    ],
+
                 ],
+
+                'options'=>
+                    [
+                        //"preset" => "islands#greenCircleIcon",
+                        "iconLayout" => 'default#image',
+                        'iconImageSize'=>[10,10],
+                        "iconImageHref" => 'https://sandbox.api.maps.yandex.net/examples/ru/2.1/icon_customImage/images/ball.png',
+                    ],
+
                 'properties'=>[
                     'balloonContentHeader' => 'header',
                     'balloonContentBody' => 'body',
                     'balloonContentFooter' =>'footer',
                     'clusterCaption'=>'cluster caption',
-                    'hintContent'=>'<strong>Текст  <s>подсказки</s></strong>'
-                ]
+                    'hintContent'=>'<strong>Текст  <s>подсказки</s></strong>',
+                ],
+
             ];
 
             $result['features'][] = $f;

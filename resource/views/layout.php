@@ -34,15 +34,21 @@
                     clusterize: true,
                     // ObjectManager принимает те же опции, что и кластеризатор.
                     gridSize: 32,
-                    clusterDisableClickZoom: true
+                    clusterDisableClickZoom: true,
+                    clusterIconLayout: 'default#pieChart',
+                    clusterIconPieChartRadius: 10,
+                    clusterIconPieChartCoreRadius: 7,
+                    clusterIconPieChartStrokeWidth: 3
                 });
 
 
                 // Чтобы задать опции одиночным объектам и кластерам,
                 // обратимся к дочерним коллекциям ObjectManager.
-                objectManager.objects.options.set('preset', 'islands#greenDotIcon');
-                objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
+                //objectManager.objects.options.set('preset', 'islands#greenDotIcon');
+
+                //console.log(objectManager.objects.options.getAll());
                 myMap.geoObjects.add(objectManager);
+
 
                 // Обработка события, возникающего при щелчке
                 // левой кнопкой мыши в любой точке карты.

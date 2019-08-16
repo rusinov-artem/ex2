@@ -21,7 +21,6 @@ $container = new ContainerBuilder();
 $fl = new PhpFileLoader($container, new FileLocator());
 $def = new Definition();
 $def->setAutowired(true)->setAutoconfigured(true)->setPublic(true);
-//$fl->load($def, );
 $fl->registerClasses($def, "Rusinov\\Ex2\\Middleware\\", __DIR__."/../src/Middleware");
 $fl->registerClasses($def, "Rusinov\\Ex2\\Repository\\", __DIR__."/../src/Repository");
 $fl->registerClasses($def, "Rusinov\\Ex2\\Controller\\", __DIR__."/../src/Controller");
