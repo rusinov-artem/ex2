@@ -14,5 +14,5 @@ require_once __DIR__."/../vendor/autoload.php";
 $app = include __DIR__."/../boot/bootApp.php";
 //echo $app->handle(parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH));
 $response =  $app->handle($request = Request::createFromGlobals());
-$response->send();
+$r = $response ? $response->send() : '';
 

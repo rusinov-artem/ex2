@@ -28,9 +28,6 @@ class YCoordinateRepositoryTest extends BaseTest
 
     public function testAll()
     {
-
-
-
         /**
          * @var $repo YCoordinateRepository
          */
@@ -46,9 +43,7 @@ class YCoordinateRepositoryTest extends BaseTest
         $coords = $repo->all();
         $this->assertCount(1, $coords);
 
-
         $fs->remove($repo->dir."/*");
-
 
     }
 }
