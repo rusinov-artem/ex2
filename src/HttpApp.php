@@ -8,6 +8,7 @@ use ReflectionFunction;
 use ReflectionMethod;
 use Rusinov\Ex2\Framework\ErrorHandler;
 use Rusinov\Ex2\Framework\MiddlewareCollection;
+use Rusinov\Ex2\LogSystem\_L;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,23 +39,31 @@ class HttpApp
 
     public function handle(Request $request)
     {
+        _L::push("handle");
+        _L::s("system", "try to get action");
         $action = $this->getAction($request);
+        _L::s("system", "try to run action");
         $r =   $this->run($action);
+        _L::s("system", "Action successfully executed");
         return $r;
     }
 
     public function getAction(Request $request)
     {
+        _L::push("getAction");
         /**
          * @var $matcher UrlMatcher
          */
+        _L::s("system", "getting UrlMatcher throught the container");
         $matcher = $this->container->get(UrlMatcher::class);
 
         try{
+            _L::s("system", "getting route from UrlMatcher for {$request->getMethod()} {$request->getUri()}");
             $route = $matcher->matchRequest($request);
         }
         catch (\Throwable $t)
         {
+            _L::s("system", "route not found");
             return "not found";
         }
 
@@ -66,6 +75,7 @@ class HttpApp
         $action->method = $route['_action'];
         $action->parameters = $route;
 
+        _L::pop();
         return $action;
     }
 

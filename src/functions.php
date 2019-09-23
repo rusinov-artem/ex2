@@ -1,5 +1,7 @@
 <?php
 
+use Rusinov\Ex2\LogSystem\_L;
+
 function view($view, $data)
 {
     extract($data);
@@ -15,16 +17,5 @@ function dt()
 
 function throwableToString(\Throwable $t)
 {
-    return $t->getMessage().' ['.$t->getCode().'] '.$t->getFile().':'.$t->getLine();
-}
-
-function _l($channel, $message, $level = 'INFO')
-{
-    global $logger, $params;
-    if(!$logger)
-    {
-        $logger = new Rusinov\Ex2\LogSystem\Log($params['channels']);
-    }
-
-    $logger->channel($channel)->send($message, $level);
+    return $t->getMessage().' code='.$t->getCode().' '.$t->getFile().':'.$t->getLine();
 }

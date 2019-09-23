@@ -4,13 +4,15 @@
 namespace Rusinov\Ex2\Framework;
 
 
+use Rusinov\Ex2\LogSystem\_L;
+
 class ErrorHandler
 {
     public static function errorHandler(int $errno , string $errstr, string $errfile, int $errline){
-        _l('UnhandledError', "#{$errno} {$errstr} at {$errfile}:{$errline}");
+        _L::s('UnhandledError', "#{$errno} {$errstr} at {$errfile}:{$errline}");
     }
 
     public static function exceptionHandler($exception){
-        _l('UnhandledException', throwableToString($exception), 'ALARM');
+        _L::s('UnhandledException', throwableToString($exception), 'ALARM');
     }
 }
