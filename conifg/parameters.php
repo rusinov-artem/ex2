@@ -2,13 +2,13 @@
 
 return
 [
-  'development' => true,
+  'development' => false,
 
    'channels' => [
-     'system' =>['*'],
-     'exception'=>['*'],
-     'UnhandledException'=>['*'],
-     'UnhandledError' => ['*'],
+//     'system' =>['*'],
+//     'exception'=>['*'],
+//     'UnhandledException'=>['*'],
+//     'UnhandledError' => ['*'],
    ],
 
     'mysql' =>
@@ -23,6 +23,11 @@ return
     'YCoordinateRepository'=>
     [
         'dir' => __DIR__."/../storage/data/coords"
-    ]
+    ],
+
+    'cache'=>
+    [
+        'dir' => __DIR__."/../storage/cache/main",
+    ],
 
 ];

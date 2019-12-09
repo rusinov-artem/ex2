@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader\FileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
-
+use Symfony\Contracts\Cache\CacheInterface;
 
 
 $container->register(Connection::class)
@@ -36,5 +36,11 @@ $container->register(\Rusinov\Ex2\Repository\FS\YCoordinateRepository::class, \R
     ->setProperties(['dir'=>$params['YCoordinateRepository']['dir']])
     //->addMethodCall('setDir', ['dir'=>$params['YCoordinateRepository']['dir']])
     ->setPublic(true);
+
+
+$container->register(CacheInterface::class)
+    ->setFactory([\Rusinov\Ex2\Factory\MainFactory::class, 'getCache'])
+    ->setArgument('$dir', $params['cache']['dir'])
+    ->setPublic(true)->setAutowired(true);
 
 return $container;
