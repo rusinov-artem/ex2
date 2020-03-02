@@ -39,7 +39,6 @@ class HttpApp
 
     public function handle(Request $request)
     {
-        _L::push("handle");
         _L::s("system", "try to get action");
         $action = $this->getAction($request);
         _L::s("system", "try to run action");
@@ -50,7 +49,6 @@ class HttpApp
 
     public function getAction(Request $request)
     {
-        _L::push("getAction");
         /**
          * @var $matcher UrlMatcher
          */
@@ -75,7 +73,6 @@ class HttpApp
         $action->method = $route['_action'];
         $action->parameters = $route;
 
-        _L::pop();
         return $action;
     }
 
