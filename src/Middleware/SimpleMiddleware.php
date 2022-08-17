@@ -20,14 +20,11 @@ class SimpleMiddleware extends AbstractMiddleware
 
     public function before(Action &$action, Request &$request, Response &$response)
     {
-
-        var_dump('Before');
         $coord = new YCoordinate();
-        $data = $request->request->get('coord');
+        $data = $request->get('coord');
         $coord->latitude = $data['latitude'];
         $coord->longitude = $data['longitude'];
         $action->parameters['c'] = $coord;
-
     }
 
     public function after(Action $action, Request &$request, Response &$response)

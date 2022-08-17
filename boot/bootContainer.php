@@ -6,15 +6,18 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
+/** @var Array $params */
+
 $containerFileName = __DIR__."/../storage/container.php";
 if(file_exists($containerFileName))
 {
-    if($params['development'] == false)
+    if(!$params['development'])
     {
         require_once $containerFileName;
         return new ProjectServiceContainer;
     }
 }
+
 $container = new ContainerBuilder();
 
 
@@ -29,6 +32,7 @@ $container->compile();
 
 $dumper = new PhpDumper($container);
 
-file_put_contents(__DIR__."/../storage/container.php", $dumper->dump(['debug'=>false]));
+file_put_contents($containerFileName, $dumper->dump(['debug'=>false]));
 
-return $container;
+require_once $containerFileName;
+return new ProjectServiceContainer;

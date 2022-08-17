@@ -1,20 +1,22 @@
 <?php
 
-/**
- * @var FileLoader $this
- */
-
 use Doctrine\DBAL\Connection;
 use Rusinov\Ex2\Controller\HomeController;
 use Rusinov\Ex2\Factory\DbConnectionFactory;
+use Rusinov\Ex2\Factory\MainFactory;
 use Rusinov\Ex2\Factory\RouterFactory;
+use Rusinov\Ex2\Repository\FS\YCoordinateRepository;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\FileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Contracts\Cache\CacheInterface;
 
+/**  @var FileLoader $this */
+/** @var Array $params */
 
+/** @var ContainerBuilder $container */
 $container->register(Connection::class)
     ->setFactory([DbConnectionFactory::class, 'getDBConnection'])
     ->addArgument($params)
@@ -32,14 +34,14 @@ $container->register(RequestContext::class)
 $container->register(HomeController::class)
     ->setPublic(true)->setAutowired(true);
 
-$container->register(\Rusinov\Ex2\Repository\FS\YCoordinateRepository::class, \Rusinov\Ex2\Repository\FS\YCoordinateRepository::class)
+$container->register(YCoordinateRepository::class, YCoordinateRepository::class)
     ->setProperties(['dir'=>$params['YCoordinateRepository']['dir']])
     //->addMethodCall('setDir', ['dir'=>$params['YCoordinateRepository']['dir']])
     ->setPublic(true);
 
 
 $container->register(CacheInterface::class)
-    ->setFactory([\Rusinov\Ex2\Factory\MainFactory::class, 'getCache'])
+    ->setFactory([MainFactory::class, 'getCache'])
     ->setArgument('$dir', $params['cache']['dir'])
     ->setPublic(true)->setAutowired(true);
 

@@ -21,7 +21,7 @@ class MapAPIController
     public function addPosition(YCoordinate $c, YCoordinateRepository $repo, CacheInterface $cache)
     {
         $repo->save($c);
-        $cache->delete('allPoints');
+       $cache->delete('allPoints');
     }
 
     public function getAll(YCoordinateRepository $repo, CacheInterface $cache)
@@ -37,6 +37,7 @@ class MapAPIController
 
         header("Content-Type: text/json");
         return $data;
-        //readfile(__DIR__."/../../storage/data/example.json");
+       // readfile(__DIR__."/../../storage/data/example.json");
+        //return "LSDKFJ";
     }
 }

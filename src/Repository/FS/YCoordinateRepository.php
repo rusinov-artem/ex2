@@ -25,7 +25,7 @@ class YCoordinateRepository
         }
 
         $file = "{$this->dir}/{$coord->id}";
-        file_put_contents($file, $str);
+        $r = file_put_contents($file, $str);
     }
 
     public function all()

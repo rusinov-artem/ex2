@@ -1,6 +1,6 @@
 <?php
 /**
- * @see __DIR__/../config/params.php
+ * @see  __DIR__."/../config/params.php"
  * @var array $params
  */
 
@@ -12,10 +12,7 @@ $routMatcherFile = __DIR__ . "/../storage/routeMatcher.php";
 $routeGeneratorFile = __DIR__ . "/../storage/routeGenerator.php";
 if(file_exists($routMatcherFile) && file_exists($routeGeneratorFile))
 {
-    if($params['development'] == false)
-    {
-        return;
-    }
+    if(!$params['development']) return;
 }
 
 $rCollection = include __DIR__."/../conifg/routes.php";
