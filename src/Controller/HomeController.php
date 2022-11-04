@@ -5,6 +5,7 @@ namespace Rusinov\Ex2\Controller;
 
 
 use Rusinov\Ex2\Entity\YCoordinate;
+use Rusinov\Ex2\Repository\FS\YCoordinateRepository;
 
 class HomeController extends BaseController
 {
@@ -16,7 +17,7 @@ class HomeController extends BaseController
 
     }
 
-    public function index()
+    public function index(YCoordinateRepository $repo)
     {
         return $this->render('index.php', []);
     }

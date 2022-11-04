@@ -24,9 +24,4 @@ class BaseTest extends TestCase
         $this->app->container->set(RequestContext::class, RequestContext::fromUri(""));
     }
 
-    public function test_CanRunRequest() {
-        $r = new Request([],[], parse_url("/home"));
-        $response = $this->app->handle($r);
-        var_dump($response->getContent());
-    }
 }

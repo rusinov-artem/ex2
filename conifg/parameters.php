@@ -2,7 +2,7 @@
 
 return
 [
-  'development' => true,
+  'development' => false,
 
    'channels' => [
 //     'system' =>['*'],

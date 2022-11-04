@@ -109,11 +109,11 @@ class HttpApp
     {
         $dependencies= [];
 
-        $reflecotr = is_array($callback)
+        $reflector = is_array($callback)
             ? new ReflectionMethod($callback[0], $callback[1])
             : new ReflectionFunction($callback);
 
-        $cParameters = $reflecotr->getParameters();
+        $cParameters = $reflector->getParameters();
 
         foreach ($cParameters as $parameter)
         {
@@ -122,9 +122,9 @@ class HttpApp
                 $dependencies[] = $parameters[$parameter->name];
                 unset($parameters[$parameter->name]);
             }
-            elseif($parameter->getClass())
+            elseif($parameter->getType())
             {
-                $dependencies[] = $this->container->get($parameter->getClass()->name);
+                $dependencies[] = $this->container->get($parameter->getType()->getName());
             }
             elseif($parameter->isDefaultValueAvailable())
             {
