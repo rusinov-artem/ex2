@@ -22,13 +22,17 @@ $container = new ContainerBuilder();
 
 
 $fl = new PhpFileLoader($container, new FileLocator());
-$def = new Definition();
-$def->setAutowired(true)->setAutoconfigured(true)->setPublic(true);
+$def = (new Definition())->setAutowired(true)->setAutoconfigured(true)->setPublic(true);
 $fl->registerClasses($def, "Rusinov\\Ex2\\Middleware\\", __DIR__."/../src/Middleware");
 $fl->registerClasses($def, "Rusinov\\Ex2\\Repository\\", __DIR__."/../src/Repository");
 $fl->registerClasses($def, "Rusinov\\Ex2\\Controller\\", __DIR__."/../src/Controller");
-$container = include __DIR__."/../conifg/container.php";
-$container->compile();
+
+$def = (new Definition())->setAutowired(true)->setAutoconfigured(true)->setPublic(true)->addTag("console.command");
+$fl->registerClasses($def, "Rusinov\\Ex2\\Console\\", __DIR__."/../src/Console");
+
+$container->addCompilerPass(new \Symfony\Component\Console\DependencyInjection\AddConsoleCommandPass());
+
+(include __DIR__."/../conifg/container.php")->compile();
 
 $dumper = new PhpDumper($container);
 

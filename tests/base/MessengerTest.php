@@ -19,7 +19,7 @@ class MyMessage{
 
 }
 
-class MessangerTest extends BaseTest
+class MessengerTest extends BaseTest
 {
     public function test_CanUseMessages() {
         $handler = new MyMessageHandler();
@@ -35,5 +35,9 @@ class MessangerTest extends BaseTest
         $bus->dispatch($msg);
 
         $bus->dispatch(new Envelope($msg));
+    }
+
+    public function test_CanFIndConsoleCOmmands() {
+
     }
 }
