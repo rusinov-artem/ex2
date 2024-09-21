@@ -1,11 +1,7 @@
 <?php
 
-
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 use Rusinov\Ex2\HttpApp;
-use Rusinov\Ex2\LogSystem\LogHandler;
-use Symfony\Component\DependencyInjection\Container;
+
 $params = include __DIR__."/../conifg/parameters.php";
 return
     (function($params)
