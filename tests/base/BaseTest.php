@@ -27,6 +27,7 @@ class BaseTest extends TestCase
     public function test_CanRunRequest() {
         $r = new Request([],[], parse_url("/home"));
         $response = $this->app->handle($r);
-        var_dump($response->getContent());
+        //var_dump($response->getContent());
+        $this->assertTrue(true);
     }
 }

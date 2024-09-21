@@ -32,6 +32,8 @@ class HttpApp
      */
     public $logger;
 
+    public $params;
+
     public function __construct()
     {
         $this->setErrorHandlers();
@@ -151,7 +153,7 @@ class HttpApp
     public function setErrorHandlers()
     {
         $eh = new ErrorHandler();
-        set_error_handler([$eh, 'errorHandler']);
-        set_exception_handler([$eh, 'exceptionHandler']);
+        // set_error_handler([$eh, 'errorHandler']);
+        // set_exception_handler([$eh, 'exceptionHandler']);
     }
 }

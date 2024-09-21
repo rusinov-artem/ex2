@@ -1,12 +1,12 @@
-FROM php:8.1.9-fpm
+FROM php:8.3.11-fpm
 
-RUN apt-get update; apt-get install -y apt-utils zip vim telnet git iputils-ping net-tools iproute2 netcat
+RUN apt-get update; apt-get install -y apt-utils zip vim telnet git iputils-ping net-tools iproute2 ncat
 
 #extention installer
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions
 
-RUN install-php-extensions gd opcache zip pdo_mysql mysqli gmp bcmath intl exif xdebug APCu memcached redis mongodb sockets mcrypt @composer
+RUN install-php-extensions gd opcache zip pdo_mysql mysqli gmp bcmath intl exif xdebug APCu memcached redis mongodb sockets @composer
 
 RUN echo '\
  xdebug.mode=develop,debug \n\

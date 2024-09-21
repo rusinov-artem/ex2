@@ -2,14 +2,10 @@
 
 <phpunit bootstrap = "boot.php"
          backupGlobals               = "false"
-         backupStaticAttributes      = "false"
          colors                      = "true"
-         convertErrorsToExceptions   = "true"
-         convertNoticesToExceptions  = "true"
-         convertWarningsToExceptions = "true"
          processIsolation            = "false"
          stopOnFailure               = "false"
-         syntaxCheck                 = "false">
+>
 
     <testsuites>
         <testsuite name="Project Test Suite">
@@ -17,12 +13,6 @@
         </testsuite>
     </testsuites>
 
-    <filter>
-        <whitelist>
-            <directory suffix=".php">../</directory>
-        </whitelist>
-    </filter>
-c
     <php>
         <env name="APP_ENV" value="testing"/>
     </php>
