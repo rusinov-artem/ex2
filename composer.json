@@ -1,10 +1,10 @@
 {
-    "name": "moderntoken/ex2",
+    "name": "rusinov-artem/ex2",
     "version":"0.0.1",
     "authors": [
         {
             "name": "RusinovArtem",
-            "email": "ar@moderntoken.com"
+            "email": "rusinov.dev@gmail.com"
         }
     ],
     "require": {
@@ -20,9 +20,7 @@
         "doctrine/dbal": "^4.1",
         "phpunit/phpunit": "^11.3",
         "symfony/messenger": "^7.1"
-
     },
-
 
     "autoload":
     {
