@@ -124,9 +124,9 @@ class HttpApp
                 $dependencies[] = $parameters[$parameter->name];
                 unset($parameters[$parameter->name]);
             }
-            elseif($parameter->getClass())
+            elseif($parameter->getType())
             {
-                $dependencies[] = $this->container->get($parameter->getClass()->name);
+                $dependencies[] = $this->container->get((string)$parameter->getType());
             }
             elseif($parameter->isDefaultValueAvailable())
             {
