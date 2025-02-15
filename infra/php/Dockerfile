@@ -1,4 +1,4 @@
-FROM php:8.3.11-fpm
+FROM php:8.4.4-fpm
 
 RUN apt-get update; apt-get install -y apt-utils zip vim telnet git iputils-ping net-tools iproute2 ncat
 
